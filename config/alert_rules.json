@@ -1,0 +1,144 @@
+{
+  "default_rules": [
+    {
+      "id": "failed_login_threshold",
+      "name": "Failed Login Threshold",
+      "description": "Detects multiple failed login attempts from the same IP",
+      "pattern": "(?i)(failed password|authentication failure|invalid user|login failed)",
+      "threshold": 5,
+      "timeframe_minutes": 15,
+      "severity": "medium",
+      "enabled": true,
+      "actions": ["alert", "email"],
+      "category": "authentication"
+    },
+    {
+      "id": "sql_injection_detection",
+      "name": "SQL Injection Detection",
+      "description": "Detects potential SQL injection attempts",
+      "pattern": "(?i)(union\\s+select|select\\s+.*\\s+from|insert\\s+into|delete\\s+from|'\\s*or\\s*'\\s*=\\s*'|admin'\\s*--)",
+      "threshold": 1,
+      "timeframe_minutes": 5,
+      "severity": "high",
+      "enabled": true,
+      "actions": ["alert", "email"],
+      "category": "web_attack"
+    },
+    {
+      "id": "xss_detection",
+      "name": "Cross-Site Scripting Detection",
+      "description": "Detects potential XSS attacks",
+      "pattern": "(?i)(<script|</script>|javascript:|onload=|onerror=|alert\\s*\\(|confirm\\s*\\(|prompt\\s*\\()",
+      "threshold": 1,
+      "timeframe_minutes": 5,
+      "severity": "medium",
+      "enabled": true,
+      "actions": ["alert", "email"],
+      "category": "web_attack"
+    },
+    {
+      "id": "path_traversal_detection",
+      "name": "Path Traversal Detection",
+      "description": "Detects directory traversal attempts",
+      "pattern": "(\\.\\./)|(\\.\\.\\\\)|(/etc/passwd)|(/etc/shadow)|(\\\\windows\\\\system32)",
+      "threshold": 1,
+      "timeframe_minutes": 5,
+      "severity": "high",
+      "enabled": true,
+      "actions": ["alert", "email"],
+      "category": "web_attack"
+    },
+    {
+      "id": "command_injection_detection",
+      "name": "Command Injection Detection",
+      "description": "Detects potential command injection attempts",
+      "pattern": "(?i)(;\\s*cat\\s+|;\\s*ls\\s+|;\\s*pwd|;\\s*id\\s*;|\\|\\s*nc\\s+|\\|\\s*wget\\s+|\\|\\s*curl\\s+|&&\\s*rm\\s+)",
+      "threshold": 1,
+      "timeframe_minutes": 5,
+      "severity": "critical",
+      "enabled": true,
+      "actions": ["alert", "email"],
+      "category": "web_attack"
+    },
+    {
+      "id": "brute_force_detection",
+      "name": "Brute Force Attack Detection",
+      "description": "Detects brute force attacks based on multiple failed attempts",
+      "pattern": "(?i)(password.*incorrect|authentication.*failed|login.*failed|too many.*attempts|account.*locked)",
+      "threshold": 10,
+      "timeframe_minutes": 10,
+      "severity": "high",
+      "enabled": true,
+      "actions": ["alert", "email"],
+      "category": "authentication"
+    },
+    {
+      "id": "scanning_detection",
+      "name": "Web Scanning Detection",
+      "description": "Detects web application scanning attempts",
+      "pattern": "(?i)(robots\\.txt|\\.htaccess|web\\.config|wp-config\\.php|admin|administrator|wp-admin|phpmyadmin)",
+      "threshold": 20,
+      "timeframe_minutes": 30,
+      "severity": "medium",
+      "enabled": true,
+      "actions": ["alert"],
+      "category": "reconnaissance"
+    },
+    {
+      "id": "malicious_user_agent",
+      "name": "Malicious User Agent Detection",
+      "description": "Detects known malicious user agents",
+      "pattern": "(?i)(sqlmap|nikto|nmap|masscan|zap|burp|w3af|havij|acunetix|nessus|openvas|metasploit)",
+      "threshold": 1,
+      "timeframe_minutes": 5,
+      "severity": "high",
+      "enabled": true,
+      "actions": ["alert", "email"],
+      "category": "reconnaissance"
+    },
+    {
+      "id": "high_error_rate",
+      "name": "High Error Rate Detection",
+      "description": "Detects unusually high error rates from a single IP",
+      "pattern": "(?i)(500 internal server error|502 bad gateway|503 service unavailable|504 gateway timeout)",
+      "threshold": 50,
+      "timeframe_minutes": 15,
+      "severity": "medium",
+      "enabled": true,
+      "actions": ["alert"],
+      "category": "availability"
+    },
+    {
+      "id": "privilege_escalation",
+      "name": "Privilege Escalation Detection",
+      "description": "Detects potential privilege escalation attempts",
+      "pattern": "(?i)(sudo|su\\s+|chmod|chown|passwd|adduser|useradd|usermod)",
+      "threshold": 5,
+      "timeframe_minutes": 10,
+      "severity": "high",
+      "enabled": true,
+      "actions": ["alert", "email"],
+      "category": "system"
+    }
+  ],
+  "rule_categories": [
+    "authentication",
+    "web_attack",
+    "reconnaissance", 
+    "system",
+    "availability",
+    "data_exfiltration"
+  ],
+  "severity_levels": [
+    "low",
+    "medium", 
+    "high",
+    "critical"
+  ],
+  "available_actions": [
+    "alert",
+    "email",
+    "block_ip",
+    "log_only"
+  ]
+}

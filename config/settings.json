@@ -1,0 +1,99 @@
+{
+  "app_config": {
+    "name": "Log Analysis & Security Alerting Platform",
+    "version": "1.0.0",
+    "description": "Comprehensive log analysis platform for detecting security incidents and generating automated alerts"
+  },
+  "log_processing": {
+    "max_file_size_mb": 100,
+    "supported_formats": [
+      "apache_common",
+      "apache_combined", 
+      "nginx",
+      "syslog",
+      "auth_log",
+      "json",
+      "csv"
+    ],
+    "retention_days": 30,
+    "auto_cleanup_enabled": true,
+    "max_logs_in_memory": 10000
+  },
+  "security_analysis": {
+    "auto_analysis_enabled": true,
+    "analysis_interval_minutes": 15,
+    "threat_intelligence_enabled": true,
+    "ip_reputation_check_enabled": false,
+    "geo_location_check_enabled": false
+  },
+  "alerting": {
+    "email_notifications_enabled": false,
+    "slack_notifications_enabled": false,
+    "webhook_notifications_enabled": false,
+    "auto_acknowledge_hours": 24,
+    "max_alerts_per_hour": 100,
+    "alert_suppression_enabled": true,
+    "duplicate_alert_window_minutes": 60
+  },
+  "email_settings": {
+    "smtp_server": "smtp.gmail.com",
+    "smtp_port": 587,
+    "use_tls": true,
+    "use_ssl": false,
+    "timeout_seconds": 30,
+    "max_retries": 3
+  },
+  "monitoring": {
+    "real_time_monitoring_enabled": false,
+    "monitoring_interval_seconds": 60,
+    "file_watch_enabled": false,
+    "api_monitoring_enabled": false
+  },
+  "dashboard": {
+    "auto_refresh_enabled": false,
+    "refresh_interval_seconds": 300,
+    "max_chart_data_points": 1000,
+    "default_time_range_hours": 24
+  },
+  "performance": {
+    "log_parsing_batch_size": 1000,
+    "max_concurrent_files": 5,
+    "memory_limit_mb": 512,
+    "enable_caching": true,
+    "cache_size_mb": 50
+  },
+  "security": {
+    "sanitize_log_data": true,
+    "mask_sensitive_data": true,
+    "sensitive_fields": [
+      "password",
+      "token",
+      "key",
+      "secret",
+      "auth",
+      "session"
+    ],
+    "ip_whitelist": [],
+    "ip_blacklist": []
+  },
+  "export": {
+    "formats": ["json", "csv", "txt"],
+    "max_export_records": 50000,
+    "include_metadata": true,
+    "compress_exports": false
+  },
+  "ui": {
+    "theme": "light",
+    "items_per_page": 50,
+    "enable_dark_mode": false,
+    "show_advanced_options": false,
+    "auto_scroll_logs": true
+  },
+  "logging": {
+    "app_log_level": "INFO",
+    "log_to_file": true,
+    "log_file_path": "logs/app.log",
+    "max_log_file_size_mb": 10,
+    "log_retention_files": 5
+  }
+}
